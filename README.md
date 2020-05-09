@@ -2,7 +2,7 @@
 A digital Aristotle implementation.
 
 ## Pre-Flight Checklist
-* Update [pip](https://pypi.org/project/pip/
+* Update [pip](https://pypi.org/project/pip/)
 * Update [git](https://git-scm.com/)
 * Update [Python](https://www.python.org/) (3.7.6 x64)
 * Install [VSCode](https://code.visualstudio.com/)
