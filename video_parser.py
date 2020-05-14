@@ -1,6 +1,7 @@
 import pytube
 import json
 import os
+import database_manager as database
 
 
 verbosity = 2
@@ -10,69 +11,63 @@ def getVideo(url):
     '''
     Given a youtube URL, appends video data to database and downloads video to temp directiory.
     '''
-
     print('[videoparser]: Getting video from "{}"'.format(url)) if verbosity >= 1 else False
+
     yt = pytube.YouTube(url)
-    printYT(yt) if verbosity >= 3 else False
-    downloadYT(yt)
 
-    if not os.path.isfile('database.txt'):
-        open('database.txt', 'a').close()
+    stream = downloadYT(yt)
 
-
-    with open('database.txt', 'r') as fobj:
-        print('[videoparser]: Loading database') if verbosity >= 2 else False
-        try:
-            data = json.load(fobj)
-        except:
-            print('[videoparser]: Database is empty. Instantiating database') if verbosity >= 2 else False
-            data = {}
+    data = database.load()
 
 
     data[yt.title] = {
-        'Author': yt.author,
-        'Description': yt.description,
-        'Length': yt.length,
-        'Rating': yt.rating,
-        'Views': yt.views,
-        'Thumbnail': yt.thumbnail_url,
-        'Restriction': yt.age_restricted
+        'title': yt.title,
+        'author': yt.author,
+        'description': yt.description,
+        'length': yt.length,
+        'rating': yt.rating,
+        'views': yt.views,
+        'thumbnail': yt.thumbnail_url,
+        'restriction': yt.age_restricted,
+        'abr': stream.abr,
+        'acodec': stream.audio_codec,
+        'bitrate': stream.bitrate,
+        'codecs': stream.codecs,
+        'fps': stream.fps,
+        'mime': stream.mime_type,
+        'res': stream.resolution,
+        'vcodec': stream.video_codec,
+        'size': stream._filesize,
+        'frames': stream.fps*yt.length
     }
 
+    database.dump(data)
     
-    with open('database.txt', 'w') as fobj:
-        print('[videoparser]: Dumping data to database') if verbosity >= 2 else False
-        json.dump(data, fobj, indent=4)
-    
+
     print('[videoparser]: Got video successfully') if verbosity >= 1 else False
 
 
-def printYT(yt):
-    '''
-    Prints youtube video object to console.
-    '''
-
-    print('--Youtube Video Object--')
-    print('Title: {}'.format(yt.title))
-    print('Author: {}'.format(yt.author))
-    print('Description: {}'.format(yt.description[0:32]))
-    print('Length (s): {}'.format(yt.length))
-    print('Rating (/5): {}'.format(yt.rating))
-    print('Views: {}'.format(yt.views))
-    print('Thumbnail: {}'.format(yt.thumbnail_url))
-    print('Restriction: {}'.format(yt.age_restricted))
 
 
 def downloadYT(yt):
+    '''
+    Downloads video to tmp directory and returns the stream used.
+    '''
+
     print('[videoparser]: Downloading video') if verbosity >= 2 else False
     stream = yt.streams.filter(progressive=True).first()
     stream.download('tmp')
+
+    return stream
 
 
 
 if __name__ == "__main__":
     print("[videoparser]: Running test...")
 
-    getVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    getVideo('https://www.youtube.com/watch?v=WgW_KwtBvro')
+    #https://www.youtube.com/watch?v=YokKp3pwVFc
+    #https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    #https://www.youtube.com/watch?v=WgW_KwtBvro
 
 
