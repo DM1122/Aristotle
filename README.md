@@ -7,6 +7,7 @@ A digital Aristotle implementation.
 * Update [Python](https://www.python.org/) (3.7.6 x64)
 * Install [VSCode](https://code.visualstudio.com/)
 * Install [Github Desktop](https://desktop.github.com/)
+* Install [Django](https://www.djangoproject.com/) (3.0.6)
 
 ## Shell Commands Reference
 ### Install a package
@@ -32,6 +33,11 @@ or
 ```
 pip install --upgrade [package]
 ```
+
+### Uninstall pip package
+'''
+pip uninstall [package]
+'''
 
 ## The 5 Rules of A Great Git Commit Message
 <p align="center">
