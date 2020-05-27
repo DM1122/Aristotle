@@ -62,5 +62,5 @@ if __name__ == "__main__":
     for d in data:
         print(d)
 
-    result = DetectFace('Circumference of a Circle')
+    result = DetectFace('Rick Astley - Never Gonna Give You Up (Video)')
     print('[facedetector]: Result: {}'.format(result))

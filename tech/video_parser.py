@@ -65,7 +65,7 @@ def downloadYT(yt):
 if __name__ == "__main__":
     print("[videoparser]: Running test...")
 
-    getVideo('https://www.youtube.com/watch?v=WgW_KwtBvro')
+    getVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
     #https://www.youtube.com/watch?v=YokKp3pwVFc
     #https://www.youtube.com/watch?v=dQw4w9WgXcQ
     #https://www.youtube.com/watch?v=WgW_KwtBvro
