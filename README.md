@@ -35,9 +35,9 @@ pip install --upgrade [package]
 ```
 
 ### Uninstall pip package
-'''
+```
 pip uninstall [package]
-'''
+```
 
 ## The 5 Rules of A Great Git Commit Message
 <p align="center">
