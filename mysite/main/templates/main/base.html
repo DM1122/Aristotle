@@ -10,25 +10,11 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link href="cover.css" rel="stylesheet">
         <!-- Custom CSS-->
-        <link rel="stylesheet" type="text/css" href="{% static 'main/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
         
 
-        <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
+        <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
 
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-                }
-            }
-        </style>
 
         {% if title %}
             <title>Digital Aristotle - {{ title }}</title>
