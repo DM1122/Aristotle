@@ -1,3 +1,4 @@
+from decouple import config
 from googleapiclient.discovery import build
 import isodate
 import os
@@ -9,6 +10,7 @@ import pytube
 #region meta
 script = os.path.basename(__file__)
 verbosity = 2
+API_KEY = config('API_YOUTUBE_KEY')
 #endregion
 
 
@@ -72,14 +74,14 @@ def getYTVideoData(idd):
     Returns dict containing video parameters of interest from given id.
     '''
 
-    print(f'[{script}]: Collecting data for "{id}"...') if verbosity>=1 else None
+    print(f'[{script}]: Collecting data for "{idd}"...') if verbosity>=1 else None
 
     youtube = build('youtube', 'v3', developerKey=API_KEY)
     request = youtube.videos().list(
         part='snippet, contentDetails, statistics', 
         chart=None, 
         hl=None, 
-        id=id, 
+        id=idd, 
         locale=None, 
         maxHeight=None, 
         maxResults=None, 
@@ -145,7 +147,9 @@ def downloadYTVideo(idd, path):
 
 if __name__ == '__main__':
     print(f'[{script}]: Running tests...')
-    case = 2
+    case = 1
+
+    print(os.environ)
 
     if case == 0:
         print(f'[{script}]: Running test case {case}...')
@@ -160,7 +164,7 @@ if __name__ == '__main__':
     elif case == 1:
         print(f'[{script}]: Running test case {case}...')
 
-        result = getYTVideoInfo(idd='dQw4w9WgXcQ')
+        result = getYTVideoData(idd='dQw4w9WgXcQ')
 
         print('Result:')
         pprint(result)
@@ -176,6 +180,9 @@ if __name__ == '__main__':
         pprint(result)
         print(f'[{script}]: Test case {case} complete.')
 
+
+    else:
+        print(f'[{script}]: No test case met.')
 
     print(f'[{script}]: Testing complete.')
 
