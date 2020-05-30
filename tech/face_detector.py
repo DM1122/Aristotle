@@ -15,7 +15,7 @@ def DetectFace(video_name):
     Returns face to no face ratio.
     '''
 
-    print("[facedetector]: Detecting faces in '{}'".format(video_name)) if verbosity >= 1 else False
+    print('[facedetector]: Detecting faces in "{}"'.format(video_name)) if verbosity >= 1 else False
 
     data = database.load()      # consider making function that only returns part of dict
     video = database.loadVideo(video_name)
