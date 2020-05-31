@@ -1,3 +1,4 @@
+from datetime import datetime
 from decouple import config
 from googleapiclient.discovery import build
 import isodate
@@ -9,13 +10,8 @@ import pytube
 
 #region meta
 script = os.path.basename(__file__)
-verbosity = 2
+verbosity = 3
 API_KEY = config('API_YOUTUBE_KEY')
-#endregion
-
-
-#region globals
-API_KEY = 'AIzaSyC-lAH7c9svDP3RsrJz4lvuDmy91G6U920'
 #endregion
 
 
@@ -97,16 +93,26 @@ def getYTVideoData(idd):
 
     data = {
         'title': response['snippet']['title'],
-        'id': idd,
-        'thumbnail': response['snippet']['thumbnails']['maxres']['url'],
+        'idd': idd,
+        'thumbnail': response['snippet']['thumbnails']['default']['url'],
         'author': response['snippet']['channelTitle'],
-        'date': response['snippet']['publishedAt'],
+        'published': datetime.strptime(response['snippet']['publishedAt'], '%Y-%m-%dT%H:%M:%S%z'),
         'description': response['snippet']['description'],
         'duration': isodate.parse_duration(response['contentDetails']['duration']).total_seconds(),
-        'views': response['statistics']['viewCount'],
-        'commentCount': response['statistics']['commentCount'],
-        'rating': int(response['statistics']['likeCount']) / (int(response['statistics']['likeCount'])+ int(response['statistics']['dislikeCount']))
+        'views': response['statistics']['viewCount'], 
     }
+
+    try:
+        data['rating'] = int(response['statistics']['likeCount']) / (int(response['statistics']['likeCount'])+ int(response['statistics']['dislikeCount']))
+    except:
+        print(f'[{script}]: WARNING: "{idd}" does not have ratings enabled.') if verbosity>=2 else None
+        data['rating'] = -1
+    
+    try:
+        data['commentCount'] = response['statistics']['commentCount']
+    except:
+        print(f'[{script}]: WARNING: "{idd}" does not have comments enabled.') if verbosity>=2 else None
+        data['commentCount'] = -1
 
     print(f'[{script}]: Got video data.') if verbosity>=2 else None
     return data
@@ -147,9 +153,7 @@ def downloadYTVideo(idd, path):
 
 if __name__ == '__main__':
     print(f'[{script}]: Running tests...')
-    case = 1
-
-    print(os.environ)
+    case = 0
 
     if case == 0:
         print(f'[{script}]: Running test case {case}...')
