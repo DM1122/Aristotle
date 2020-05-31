@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'users.apps.UsersConfig',
     'library.apps.LibraryConfig',
+    'studio.apps.StudioConfig',
 
     'crispy_forms',
     
