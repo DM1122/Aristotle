@@ -1,0 +1,3 @@
+'''
+Visual awareness. Visual processing.
+'''

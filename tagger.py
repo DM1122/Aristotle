@@ -14,13 +14,13 @@ import numpy as np
 from pprint import pprint
 
 
-#region meta
+
 script = os.path.basename(__file__)
 verbosity = 3
-#endregion
 
 
-#region globals
+
+
 tags = [        # the definitive list of available tags
     'New',
     'Credible',
@@ -37,13 +37,11 @@ tags = [        # the definitive list of available tags
 ]
 
 
-
-
 date_format = '%Y/%m/%d'
-#endregion
 
 
-#region functions
+
+
 def createTags():
     print(f'[{script}]: Creating tags...') if verbosity>=1 else None
 
@@ -134,7 +132,7 @@ def checkTagQuick(video):
 
     if flag:
         applyTag('Quick', video)
-#endregion
+
 
 
 
@@ -143,9 +141,10 @@ if __name__ == '__main__':
 
     clearVideoTags()
 
-    # for video in Video.objects.all():
-    #     checkTagNew(video)
-    #     checkTagQuick(video)
+    for video in Video.objects.all():
+        print(video.tags.name)
+        # checkTagNew(video)
+        # checkTagQuick(video)
 
 
 

@@ -12,22 +12,35 @@ from library.models import Tag, Video, SearchQuery
 from libs import youtubelib
 import numpy as np
 from pprint import pprint
+import librarian
 
 
 
-#region meta
 script = os.path.basename(__file__)
 verbosity = 3
-#endregion
 
 
-#region globals
-query_sample_size = 3
-search_sample_size = 3
-#endregion
+
+def expedition(query_sample_size=3, search_sample_size=3):
+    '''
+    Searches youtube for relevant videos according to popular search queries in database.
+    '''
+    print(f'[{script}]: Conducting expedition...')
+
+    queries = sampleSearchQueries(n=query_sample_size)
+
+    for query in queries:
+        ids = youtubelib.searchYT(query=query, maxResults=search_sample_size)
+
+        for idd in ids:
+            data = youtubelib.getYTVideoData(idd=idd)
+
+            librarian.storeVideoData(data)
+    
+    print(f'[{script}]: Expedition complete.')
 
 
-#region functions
+
 def sampleSearchQueries(n):
     '''
     Samples queries to be searched from searchQuery model according to popularity.
@@ -57,42 +70,17 @@ def sampleSearchQueries(n):
     return samples
 
 
-def saveVideoData(data):
-    Video(
-        title=data['title'],
-        idd=data['idd'],
-        thumbnail=data['thumbnail'],
-        author=data['author'],
-        published=data['published'],
-        description=data['description'],
-        duration=data['duration'],
-        views=data['views'],
-        rating=data['rating'],
-        commentCount=data['commentCount']
-    ).save()
-
-    print(f'[{script}]: Added "{idd}" to database!') if verbosity>=1 else None
-
-
-#endregion
-
 
 if __name__ == '__main__':
     print(f'[{script}]: Running Scout...')
 
-    queries = sampleSearchQueries(n=query_sample_size)
-
-    for query in queries:
-        ids = youtubelib.searchYT(query=query, maxResults=search_sample_size)
-
-        for idd in ids:
-            data = youtubelib.getYTVideoData(idd=idd)
-
-            saveVideoData(data)
+    expedition()
 
 
 
-    print(f'[{script}]: Expedition complete.')
+
+
+    
 
 
 
