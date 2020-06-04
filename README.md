@@ -66,6 +66,20 @@ Install packages in production environment
 pipenv install --ignore-pipfile
 ```
 
+## Using pre-commit
+
+###
+Install hooks
+```
+pre-commit install
+```
+
+###
+Format all files
+```
+pre-commit run --all-files
+```
+
 
 ## The 5 Rules of A Great Git Commit Message
 <p align="center">
