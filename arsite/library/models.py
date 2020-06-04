@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 
-
 class Tag(models.Model):
     name = models.CharField(max_length=16)
 
@@ -11,12 +10,12 @@ class Tag(models.Model):
 
 
 class Video(models.Model):
-    title = models.CharField(default='None', max_length=128)
-    retrieved = models.DateTimeField(default=timezone.now)      # auto_now_add=True
-    updated = models.DateTimeField(default=timezone.now)        #auto_now=True
-    idd = models.CharField(default='None', max_length=32)
-    thumbnail = models.URLField(max_length=256, default='')
-    author = models.CharField(default='None', max_length=64)
+    title = models.CharField(default="None", max_length=128)
+    retrieved = models.DateTimeField(default=timezone.now)  # auto_now_add=True
+    updated = models.DateTimeField(default=timezone.now)  # auto_now=True
+    idd = models.CharField(default="None", max_length=32)
+    thumbnail = models.URLField(max_length=256, default="")
+    author = models.CharField(default="None", max_length=64)
     published = models.DateField()
     description = models.TextField()
     duration = models.IntegerField(default=0)
@@ -32,10 +31,8 @@ class Video(models.Model):
 
 
 class SearchQuery(models.Model):
-    query = models.CharField(default='None', max_length=128)
+    query = models.CharField(default="None", max_length=128)
     count = models.IntegerField(default=0)
-
 
     def __str__(self):
         return self.query
-

@@ -6,38 +6,71 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0001_initial'),
+        ("main", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='video',
-            name='rating',
+            model_name="video",
+            name="rating",
             field=models.DecimalField(decimal_places=2, default=0.0, max_digits=3),
         ),
         migrations.AddField(
-            model_name='video',
-            name='tag1',
-            field=models.CharField(choices=[('NEW', 'New'), ('CRE', 'Credible'), ('INT', 'Interactive'), ('PER', 'Personal'), ('ANI', 'Animated'), ('P&P', 'Paper & Pencil')], default='None', max_length=3),
+            model_name="video",
+            name="tag1",
+            field=models.CharField(
+                choices=[
+                    ("NEW", "New"),
+                    ("CRE", "Credible"),
+                    ("INT", "Interactive"),
+                    ("PER", "Personal"),
+                    ("ANI", "Animated"),
+                    ("P&P", "Paper & Pencil"),
+                ],
+                default="None",
+                max_length=3,
+            ),
         ),
         migrations.AddField(
-            model_name='video',
-            name='tag2',
-            field=models.CharField(choices=[('NEW', 'New'), ('CRE', 'Credible'), ('INT', 'Interactive'), ('PER', 'Personal'), ('ANI', 'Animated'), ('P&P', 'Paper & Pencil')], default='None', max_length=3),
+            model_name="video",
+            name="tag2",
+            field=models.CharField(
+                choices=[
+                    ("NEW", "New"),
+                    ("CRE", "Credible"),
+                    ("INT", "Interactive"),
+                    ("PER", "Personal"),
+                    ("ANI", "Animated"),
+                    ("P&P", "Paper & Pencil"),
+                ],
+                default="None",
+                max_length=3,
+            ),
         ),
         migrations.AddField(
-            model_name='video',
-            name='tag3',
-            field=models.CharField(choices=[('NEW', 'New'), ('CRE', 'Credible'), ('INT', 'Interactive'), ('PER', 'Personal'), ('ANI', 'Animated'), ('P&P', 'Paper & Pencil')], default='None', max_length=3),
+            model_name="video",
+            name="tag3",
+            field=models.CharField(
+                choices=[
+                    ("NEW", "New"),
+                    ("CRE", "Credible"),
+                    ("INT", "Interactive"),
+                    ("PER", "Personal"),
+                    ("ANI", "Animated"),
+                    ("P&P", "Paper & Pencil"),
+                ],
+                default="None",
+                max_length=3,
+            ),
         ),
         migrations.AddField(
-            model_name='video',
-            name='thumbnail',
-            field=models.URLField(default='None', max_length=256),
+            model_name="video",
+            name="thumbnail",
+            field=models.URLField(default="None", max_length=256),
         ),
         migrations.AddField(
-            model_name='video',
-            name='url',
-            field=models.URLField(default='None', max_length=256),
+            model_name="video",
+            name="url",
+            field=models.URLField(default="None", max_length=256),
         ),
     ]

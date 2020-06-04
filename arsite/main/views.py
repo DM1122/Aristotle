@@ -1,26 +1,25 @@
 from django.shortcuts import render
+
 # from .models import Video
 
 
-
 def home(request):
-    return render(request, 'main/home.html')
+    return render(request, "main/home.html")
 
 
 def about(request):
-    context = {
-        'title': 'About'
-    }
+    context = {"title": "About"}
 
-    return render(request, 'main/about.html', context)
+    return render(request, "main/about.html", context)
 
 
 def tools(request):
-    return render(request, 'main/tools.html')
+    return render(request, "main/tools.html")
 
 
 def vision(request):
-    return render(request, 'main/vision.html')
+    return render(request, "main/vision.html")
+
 
 # def browser(request):
 #     context = {
@@ -29,4 +28,3 @@ def vision(request):
 #     }
 
 #     return render(request, 'main/browser.html', context)
-

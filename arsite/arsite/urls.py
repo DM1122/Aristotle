@@ -1,4 +1,4 @@
-'''
+"""
 arsite URL Configuration
 
 The "urlpatterns" list routes URLs to views. For more information please see:
@@ -13,7 +13,7 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-'''
+"""
 
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
@@ -25,19 +25,14 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # Main
-    path('', include('main.urls')),
-
+    path("", include("main.urls")),
     # Admin
-    path('admin/', admin.site.urls),
-
+    path("admin/", admin.site.urls),
     # Users
-    path('users/', include('users.urls')),
-
+    path("users/", include("users.urls")),
     # Library
-    path('library/', include('library.urls')),
-] 
+    path("library/", include("library.urls")),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-

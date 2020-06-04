@@ -1,0 +1,3 @@
+"""
+Text interpretation, segmentation, inferencing.
+"""
