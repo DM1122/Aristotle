@@ -41,6 +41,32 @@ pip install --upgrade [package]
 pip uninstall [package]
 ```
 
+### Uninstall all packages
+```
+pip freeze > requirements.txt && pip uninstall -r requirements.txt -y
+```
+
+## Using pipenv
+
+###
+Install all packages specified in Pipfile
+```
+pipenv install
+```
+
+###
+Install new package and add to Pipfile
+```
+pipenv install [PACKAGE]
+```
+
+###
+Install packages in production environment
+```
+pipenv install --ignore-pipfile
+```
+
+
 ## The 5 Rules of A Great Git Commit Message
 <p align="center">
   <img src="https://imgs.xkcd.com/comics/git_commit.png" width="256">
