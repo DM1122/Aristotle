@@ -1,7 +1,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Aristotle Digital
-<p align="center"><img src="art/png/logo.png" height="256"></p>
+<img src="art/png/logo.png" height="256">
 A next-generation online learning tool. Built for students, by students.
 
 
