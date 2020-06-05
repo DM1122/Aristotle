@@ -1,8 +1,12 @@
-from django.db import models
+"""User app models."""
+# django
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Profile(models.Model):
+    """User profiles model."""
+
     user = models.OneToOneField(
         User, on_delete=models.CASCADE
     )  # delete profile when user is deleted. Do not delete user if profile is deleted.

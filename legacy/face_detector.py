@@ -1,8 +1,12 @@
+# stdlib
+import os
+
+# external
 import cv2
 import numpy as np
-import os
-import database_manager as database
 
+# project
+import database_manager as database
 
 verbosity = 2
 

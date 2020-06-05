@@ -1,25 +1,25 @@
+"""Wrapper for youtube api requests."""
+
+# stdlib
+import os
 from datetime import datetime
+from pprint import pprint
+
+# external
+import isodate
+import pytube
 from decouple import config
 from googleapiclient.discovery import build
-import isodate
-import os
-from pprint import pprint
-import pytube
 
-
-# region meta
 script = os.path.basename(__file__)
 verbosity = 3
 API_KEY = config("API_YOUTUBE_KEY")
-# endregion
 
 
-# region functions
-def searchYT(query, maxResults=16):
+def search(query, max_results=16):
     """
-    Returns list of relevant YT video ids.
+    Return list of relevant YT video ids.
     """
-
     print(f'[{script}]: Searching YT for "{query}"...') if verbosity >= 1 else None
 
     youtube = build("youtube", "v3", developerKey=API_KEY)
@@ -33,7 +33,7 @@ def searchYT(query, maxResults=16):
         forMine=None,
         location=None,
         locationRadius=None,
-        maxResults=maxResults,
+        maxResults=max_results,
         onBehalfOfContentOwner=None,
         order=None,
         pageToken=None,
@@ -64,11 +64,10 @@ def searchYT(query, maxResults=16):
     return ids
 
 
-def getYTVideoData(idd):
+def get(idd):
     """
-    Returns dict containing video parameters of interest from given id.
+    Return dict containing video metadata of interest from given id.
     """
-
     print(f'[{script}]: Collecting data for "{idd}"...') if verbosity >= 1 else None
 
     youtube = build("youtube", "v3", developerKey=API_KEY)
@@ -110,7 +109,7 @@ def getYTVideoData(idd):
             int(response["statistics"]["likeCount"])
             + int(response["statistics"]["dislikeCount"])
         )
-    except:
+    except KeyError:
         print(
             f'[{script}]: WARNING: "{idd}" does not have ratings enabled.'
         ) if verbosity >= 2 else None
@@ -118,7 +117,7 @@ def getYTVideoData(idd):
 
     try:
         data["commentCount"] = response["statistics"]["commentCount"]
-    except:
+    except KeyError:
         print(
             f'[{script}]: WARNING: "{idd}" does not have comments enabled.'
         ) if verbosity >= 2 else None
@@ -128,9 +127,9 @@ def getYTVideoData(idd):
     return data
 
 
-def downloadYTVideo(idd, path):
+def download(idd, path):
     """
-    Downloads video to path and returns the stream data.
+    Download video to path and returns the stream data.
     """
     print(f'[{script}]: Downloading YT video "{idd}"...') if verbosity >= 1 else None
 
@@ -138,10 +137,8 @@ def downloadYTVideo(idd, path):
         yt = pytube.YouTube("https://www.youtube.com/watch?v=" + idd)
         stream = yt.streams.filter(progressive=True).first()
         stream.download(path, filename=idd)
-    except:
-        print(
-            f'[{script}]: Failed download of YT video "{idd}".'
-        ) if verbosity >= 0 else None
+    except Exception:
+        print(f'[{script}]: Failed download of YT video "{idd}".')
         return None
 
     data = {
@@ -164,9 +161,6 @@ def downloadYTVideo(idd, path):
     return data
 
 
-# endregion
-
-
 if __name__ == "__main__":
     print(f"[{script}]: Running tests...")
     case = 0
@@ -174,7 +168,7 @@ if __name__ == "__main__":
     if case == 0:
         print(f"[{script}]: Running test case {case}...")
 
-        result = searchYT(query="Never gonna", maxResults=16)
+        result = search(query="Never gonna", maxResults=16)
 
         print("Result:")
         pprint(result)
@@ -183,7 +177,7 @@ if __name__ == "__main__":
     elif case == 1:
         print(f"[{script}]: Running test case {case}...")
 
-        result = getYTVideoData(idd="dQw4w9WgXcQ")
+        result = get(idd="dQw4w9WgXcQ")
 
         print("Result:")
         pprint(result)
@@ -192,7 +186,7 @@ if __name__ == "__main__":
     elif case == 2:
         print(f"[{script}]: Running test case {case}...")
 
-        result = downloadYTVideo(idd="YokKp3pwVFc", path="tmp")
+        result = download(idd="YokKp3pwVFc", path="tmp")
 
         print("Result:")
         pprint(result)

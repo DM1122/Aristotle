@@ -1,40 +1,26 @@
 """
 Updates all video entries in database. Does not reprocess video. Wrapper for requests to Video model.
-Will run on command, as well as when video is sent to display.
 """
 
-import os, sys
+# stdlib
+import os
 
-# sys.path.append('arsite')
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'arsite.settings')
-# import django
-# django.setup()
+# django
+import django
 
-# from library.models import *
-# from django.utils import timezone
-
-# # from temporal import *
-# # sys.path.append('/Aristotle')
-# from .. import libs
-
-# import numpy as np
-# from pprint import pprint
-
+# project
+from library.models import Video
+from libs import youtubelib
 
 script = os.path.basename(__file__)
 verbosity = 3
 
 
-def main():
-    print(f"[{script}]: Running Librarian...")
-
-
-def storeVideoData(data):
+def store_video_data(data):
     """
-    Updates video entry or creates new video entry in library if one does not exist.
+    Update video entry or creates new video entry in library if one does not exist.
     """
-
-    data["updated"] = timezone.now()
+    data["updated"] = django.utils.timezone.now()
     video, created = Video.objects.update_or_create(idd=data["idd"], defaults=data)
 
     if created:
@@ -47,69 +33,54 @@ def storeVideoData(data):
 
 def housekeeping():
     """
-    Updates the entire video library metadata. Should call tagger afterwards.
+    Update the entire video library metadata. Does not update tags.
     """
-
     print(f"[{script}]: Conducting housekeeping...")
 
     for video in Video.objects.all():
         data = youtubelib.getYTVideoData(idd=video.idd)
-        storeVideoData(data)
+        store_video_data(data)
 
     print(f"[{script}]: Housekeeping complete.")
 
 
 # region helpers
-def getStoredVideoIdds():
+def get_stored_video_idds():
     """
-    Returns a list of all currently stored video idds from database.
+    Return a list of all currently stored video idds from database.
     """
-
     idds = [video.idd for video in Video.objects.all()]
 
     return idds
 
 
-def getVideoMetadata(idd):
+def get_video_data(idd):
     """
-    Returns video obj from library according to idd.
+    Return video obj from library according to idd.
     """
-
     video = Video.objects.get(idd=idd)
 
     return video
 
 
-def clearVideoLibrary():
+def clear_video_library():
     """
     Wipes entire video library.
     """
-
     print(f"[{script}]: Clearing video library.")
 
-    for video in getVideoLibrary():
+    for video in get_video_library():
         video.delete()
         print(f'[{script}]: Removed "{video}".') if verbosity >= 3 else None
 
     print(f"[{script}]: Cleared video library.")
 
 
-def getVideoLibrary():
+def get_video_library():
     """
-    Retrives all video data in library.
+    Retrieve all video data in library.
     """
-
     return Video.objects.all()
 
 
 # endregion
-
-
-if __name__ == "__main__":
-    print(f"[{script}]: Run cortex entrypoint.")
-
-    # pprint(sys.path)
-    # print()
-    # pprint(os.environ)
-
-    # housekeeping()

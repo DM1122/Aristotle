@@ -1,12 +1,17 @@
-from django.shortcuts import render, redirect
+"""Views for users app."""
 
-# from django.contrib.auth.forms import UserCreationForm
+# django
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+
 from .forms import UserRegisterForm
+
+# from django.contrib.auth.forms import UserCreationForm
 
 
 def registration(request):
+    """Register form logic."""
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -22,4 +27,5 @@ def registration(request):
 
 @login_required
 def profile(request):
+    """Return profile view if user is logged in."""
     return render(request, "users/profile.html")

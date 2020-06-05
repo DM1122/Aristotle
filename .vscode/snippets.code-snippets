@@ -10,7 +10,7 @@
 		"scope": "python",
 		"prefix": "doc",
 		"body": [
-			"'''",
+			"\"\"\"",
 			"${1:Description}.",
 			"",
 			"Args:",
@@ -18,9 +18,31 @@
 			"",
 			"Returns:",
 			"\t${5:var} (${6:type}): ${7:label}",	
-			"'''",
+			"\"\"\"",
 			"$0"
 		],
 		"description": "Google-style func docstring"
+	},
+
+	"Print": {
+		"scope": "python",
+		"prefix": "print",
+		"body": [
+			"print(f\"[{script}]: ${1:Message}\") if verbosity >= ${2:verbosity} else None",
+			"$0"
+		],
+		"description": "Formatted print with verbosity"
+	},
+
+	"Meta": {
+		"scope": "python",
+		"prefix": "meta",
+		"body": [
+			"script = os.path.basename(__file__)",
+			"verbosity = 3",
+			"$0"
+		],
+		"description": "Standard meta globals"
 	}
+	
 }

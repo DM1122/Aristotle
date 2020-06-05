@@ -2,25 +2,16 @@
 Parses entire database and applies tags according to Video metadata.
 """
 
-import os, sys
+# stdlib
+import os
 
-
-# sys.path.append('./arsite')
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'arsite.settings')
-# import django
-# django.setup()
-# from library.models import Tag, Video, SearchQuery
-# from libs import youtubelib
-# import numpy as np
-# from pprint import pprint
-
-# from datetime import datetime
+# project
+from library.models import Tag, Video
 
 script = os.path.basename(__file__)
 verbosity = 3
 
-
-tags = [  # the definitive list of available tags
+TAG_LIST = [  # the definitive list of available tags
     "New",
     "Credible",
     "Interactive",
@@ -36,16 +27,61 @@ tags = [  # the definitive list of available tags
 ]
 
 
-date_format = "%Y/%m/%d"
+def apply_tags(video):
+    """
+    Apply relevant tags to video according to metadata.
+    
+    Args:
+        video (Video): video object in database
+    """
+    print(f"[{script}]: Applying tags to {video}...") if verbosity >= 1 else None
+
+    check_list = [check_tag_new, check_tag_quick]
+
+    for check in check_list:
+        tag, flag = check(video=video)
+        if flag:
+            apply_tag(name=tag, video=video)
+        else:
+            print(
+                f"[{script}]: Skipped '{tag}' on '{video.idd}'."
+            ) if verbosity >= 3 else None
+
+    print(f"[{script}]: Applied tags.") if verbosity >= 2 else None
 
 
-def createTags():
-    print(f"[{script}]: Creating tags...") if verbosity >= 1 else None
+# region Helpers
+def apply_tag(name, video):
+    """
+    Apply specified tag to video.
+    
+    Args:
+        name (str): tag name
+        video (Video): video object in database
+    """
+    if name not in TAG_LIST:
+        raise ValueError(f'[{script}]: Tag "{name}" does not exist in database!')
+
+    tag = Tag.objects.get(name=name)
+    video.tags.add(tag)
+
+    print(f'[{script}]: Applied "{tag}" tag to "{video}".') if verbosity >= 2 else None
+
+
+def setup_tags():
+    """
+    Instatiate tags from TAG_LIST into database.
+
+    Does not clear previous tags to prevent video tag reference loss.
+
+    TODO: remove tags that are not listed in TAG_LIST
+    """
+    print(f"[{script}]: Setting up tags...") if verbosity >= 1 else None
 
     # get current tags in database to avoid duplication
     tags_current = [x.name for x in Tag.objects.all()]
 
-    for tag in tags:
+    for tag in TAG_LIST:
         if tag in tags_current:
             print(
                 f'[{script}]: WARNING: "{tag}" already in database. Ignoring.'
@@ -57,11 +93,13 @@ def createTags():
     print(f"[{script}]: Tag creation complete.") if verbosity >= 2 else None
 
 
-def clearTags():
+def clear_all_tags():
     """
-    Clears the database of all tags.
+    Clear the database of all tags.
     """
-    print(f"[{script}]: Clearing tags from database.") if verbosity >= 1 else None
+    print(
+        f"[{script}]: Clearing tags from library database."
+    ) if verbosity >= 1 else None
 
     for tag in Tag.objects.all():
         tag.delete()
@@ -70,11 +108,10 @@ def clearTags():
     print(f"[{script}]: Done clearing database tags.") if verbosity >= 2 else None
 
 
-def clearVideoTags():
+def clear_all_video_tags():
     """
-    Clears all tags from all videos in database.
+    Clear all tags from all videos in database.
     """
-
     print(f"[{script}]: Clearing tags from all videos.") if verbosity >= 1 else None
 
     for video in Video.objects.all():
@@ -84,60 +121,46 @@ def clearVideoTags():
     print(f"[{script}]: Done clearing video tags.") if verbosity >= 2 else None
 
 
-def applyTag(name, video):
+# endregion
+
+
+# region Checks
+def check_tag_new(video):
     """
-    Applies a given tag to a given video.
+    Determine if tag 'New' is applicable.
+    
+    Args:
+        video (Video): video object in database
+
+    Returns:
+        tag (str): tag to be applied
+        flag (bool): whether or not to apply tag
     """
-    if name not in tags:
-        raise ValueError(f'[{script}]: Tag "{tag}" does not exist in database.')
+    tag = "New"
 
-    tag = Tag.objects.get(name=name)
-    video.tags.add(tag)
-    print(f'[{script}]: Applied "{tag}" tag to "{video}".') if verbosity >= 2 else None
-
-
-# def applyTags(video):
-#     '''
-#     Contains all the logic for choosing which tags to apply based on video metadata.
-#     '''
-#     print(f'[{script}]: Applying tags to "{video}"...') if verbosity>=1 else None
-
-
-#     result = checkTagNew(video)
-
-#     print(f'[{script}]: Done application to "{video}".') if verbosity>=2 else None
-
-
-def checkTagNew(video):
-    """
-    Determines whether {tag} is applicable and if so, applies tag.
-    """
     delta = video.updated.date() - video.published
 
     flag = True if delta.days <= 30 else False
 
-    if flag:
-        applyTag("New", video)
+    return tag, flag
 
 
-def checkTagQuick(video):
+def check_tag_quick(video):
     """
-    Determines whether {tag} is applicable and if so, applies tag.
+    Determine if tag 'Quick' is applicable.
+    
+    Args:
+        video (Video): video object in database
+
+    Returns:
+        tag (str): tag to be applied
+        flag (bool): whether or not to apply tag
     """
+    tag = "Quick"
+
     flag = True if video.duration <= 90 else False
 
-    if flag:
-        applyTag("Quick", video)
+    return tag, flag
 
 
-if __name__ == "__main__":
-    print(f"[{script}]: Run cortex entrypoint.")
-
-    # clearVideoTags()
-
-    # for video in Video.objects.all():
-    #     print(video.tags.name)
-    #     # checkTagNew(video)
-    #     # checkTagQuick(video)
-
-    # print(f'[{script}]: Tag job complete.')
+# endregion

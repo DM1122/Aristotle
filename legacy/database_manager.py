@@ -1,5 +1,8 @@
-import os
+# stdlib
 import json
+import os
+
+# external
 import cv2
 
 ## Handler for database & video repository

@@ -1,8 +1,14 @@
+"""Models for studio app."""
+# django
 from django.db import models
+
+# project
 from library.models import Video
 
 
 class MultipleChoiceQuiz(models.Model):
+    """Multiple choice model."""
+
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     prompt = models.TextField()
     timestamp = models.IntegerField(default=0)
@@ -19,4 +25,4 @@ class MultipleChoiceQuiz(models.Model):
     option4_redirect = models.URLField()
 
     def __str__(self):
-        return f"{video}: {prompt}"
+        return f"{self.video}: {self.prompt}"

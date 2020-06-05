@@ -1,12 +1,58 @@
+# Configuration for Flake8.
+
 [flake8]
-ignore = E203, E266, E501, W503, F403, F401
+count = True
+statistics = True
+show-source = True
 max-line-length = 88
-max-complexity = 18
-select = B,C,E,F,W,T4,B9
+max-complexity = 10
+import-order-style = google
+
+; Only works from pre-commit file instead
+; exclude =
+;     __pycache__,
+;     */legacy/,
+;     */migrations/
+
+ignore =
+    # see https://github.com/PyCQA/pycodestyle/issues/373
+    E203,
+    # too many blank lines
+    E303,
+    # One-line docstrings should fit in one line
+    D200,
+    # Line too long. We'll let black handle this
+    E501,
+    # Blank line contains whitespace
+    W293,
+    # Blank line at end of file
+    W391,
+    # module-level import not at top of file
+    E402,
+    # Expected two blank lines before function def
+    E302,
+    # block comment should start with '#'
+    E265,
+    # Imported but unused. Disable sparingly.   <-------------
+    F401,
+    # Line break before binary operator
+    W503,
+    # Missing docstring in magic method
+    D105,
+    # Missing docstring in __init__
+    D107,
+    # Missing whitespace after ','
+    E231,
+    # Import statements are in the wrong order. Lets let isort handle this.
+    I100,
+    # Additional newline in a group of imports. Let isort handle.
+    I202
 
 
-; [flake8]
-; ignore = E203, E266, E501, W503, F403, F401
-; max-line-length = 89
-; max-complexity = 18
-; select = B,C,E,F,W,T4,B9
+
+application-import-names = lobes, components, libs, library
+
+
+
+
+

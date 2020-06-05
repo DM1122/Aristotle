@@ -1,29 +1,44 @@
 """
-Memory consolidation. Visual & auditory memory.
+Temporal lobe controller.
+
+Responsible for memory consolidation, visual & auditory memory.
 """
 
-import os, sys
+# stdlib
+import os
+from pprint import pprint
 
-from components import scout, librarian, tagger, querier
-
+# project
+from components import librarian, querier, scout, tagger
 
 script = os.path.basename(__file__)
 verbosity = 3
 
 
-def refresh():
+def update():
+    """
+    Update lobe.
+    """
+    print(f"[{script}]: Updating temporal lobe...")
 
-    print(f"[{script}]: Refreshing Aristotle temporal lobe...")
+    queries = querier.sample_search_queries(n=3)
+    datas = scout.expedition(queries=queries, search_size=3, search_depth=1)
 
-    queries = querier.sampleSearchQueries(n=3)
-    results = scout.expedition(queries=queries, search_sample_size=3, search_depth=1)
+    for data in datas:
+        librarian.store_video_data(data=data)
+
+    for video in librarian.get_video_library():
+        tagger.apply_tags(video)
+
+    print(f"[{script}]: Update complete.")
 
 
 def setup():
-    print(f"[{script}]: Setting up Aristotle temporal lobe...")
+    """
+    Run component-level setup.
+    """
+    print(f"[{script}]: Setting up temporal lobe...") if verbosity >= 1 else None
 
-    print(f"[{script}]: Setup complete.")
+    tagger.setup_tags()
 
-
-if __name__ == "__main__":
-    print(f"[{script}]: Run cortex entrypoint.")
+    print(f"[{script}]: Set up complete.") if verbosity >= 2 else None
