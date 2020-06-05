@@ -1,79 +1,93 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-# Aristotle
-A digital Aristotle implementation.
-<img src="art/png/logo.png" height="32">
+# Aristotle Digital
+A next-generation online learning tool. Built for students, by students.
+<img src="art/png/logo.png" height="32" align='right>
 
-# High-Level V1.0 Objectives :book: :galaxy: :brain:
-* Intelligent curation and tagging of YouTube videos for education
+Developed by *Galaxy Heart Studios* :milky_way:
 
-:brain:
-:Brain:
+## Vision
+In an era of social distancing, effective online learning is of paramount importance for the success of the next generation of students, and the continuity of humanity's ventures in every field of study. Aristotle Digital's mission is to provide students and educators alike a set of tools to facilitate and enrich the online learning experience. Join us as we build Humanity's smartest online learning tool. :book: :brain:
 
+## High-Level V1.0 Objectives
+* Intelligent video curation for education
+* Intelligent video player
+* Aristotle Digial website
 
+## Infinity and Beyond
+* Engagement tools for educators with online content
+* App for tracking student-level progress
+* Automagic generation of curriculum
+* Assessment generation
+* Computer-generated learning content
 
 ## Pre-Flight Checklist
-* Install [Python](https://www.python.org/) (3.7.6 x64)
-* Install [pip](https://pypi.org/project/pip/)
-* Update [git](https://git-scm.com/)
+### Recommended Software
+* [VSCode](https://code.visualstudio.com/)
+* [Github Desktop](https://desktop.github.com/)
 
-* Install [VSCode](https://code.visualstudio.com/)
-* Install [Github Desktop](https://desktop.github.com/)
-* Install [Django](https://www.djangoproject.com/) (3.0.6)
+### Required Libraries
+* [Python](https://www.python.org/) (3.7.6 x64)
+* [git](https://git-scm.com/)
+* [pip](https://pypi.org/project/pip/)
+* [pipenv](https://pypi.org/project/pipenv/)
 
-## Shell Commands Reference
+pipenv will take care of the rest.
 
-## Using pipenv
-
-###
-Install all packages specified in Pipfile
+## Getting Started
+1. Download repo through github desktop
+1. Install all packages specified in Pipfile
 ```
 pipenv install
 ```
+1. Profit
 
-###
-Install new package and add to Pipfile
-```
-pipenv install [PACKAGE]
-```
+<!--should mention .env keys-->
 
+## Committing to Repository
+This repo is configured to use pre-commit hooks. The pre-commit pipeline is configured as follows:
+<img src="https://miro.medium.com/max/1400/1*zEyQac8rhvayY-2p5DeUHg.png" align="center">
+
+A successful commit therefore requires satisfying the syntactic rules put forth by isort, black, and flake8.
+
+isort automatically orders import statements, while black automatically structures code according to PEP8. Flake8 does not provide automatic correction, and must be dealt with manually. It is highly reccomended to install the flake8 linter for the code editor of your choice.
+
+## Shell Commands Reference
+## Using pipenv
+pipenv automatically creates and manages a virtualenv for the project along will any required packages and dependencies. You no longer need to use pip and virtualenv separately. They work together.
 ###
+
 Install packages in production environment
 ```
 pipenv install --ignore-pipfile
 ```
 
 ## Using pre-commit
-
+Runs on every git commit. Will not push code unless hooks pass.
 ###
-Install hooks
-```
-pre-commit install
-```
-
-###
-Format all files
+Check all files
 ```
 pre-commit run --all-files
 ```
-
-
+###
+Update hooks
+```
+pre-commit autoupdate
+```
 ## The 5 Rules of A Great Git Commit Message
-<p align="center">
-  <img src="https://imgs.xkcd.com/comics/git_commit.png" width="256">
-</p>
+<img src="https://imgs.xkcd.com/comics/git_commit.png" width="256" align"center">
 
 1. Write in the imperative
-2. Capitalize first letter in the subject line 
-3. Describe what was done and why, but not how
-4. Limit subject line to 50 characters
-5. End without a period
+1. Capitalize first letter in the subject line 
+1. Describe what was done and why, but not how
+1. Limit subject line to 50 characters
+1. End without a period
 
-More [info](https://www.theserverside.com/video/Follow-these-git-commit-message-guidelines)
+More [info](https://www.theserverside.com/video/Follow-these-git-commit-message-guidelines).
 
 ## Collaborative Code Best Practices
-
 1. Ensure your Git client is configured with the correct email address and linked to your GitHub user.
-2. Ensure no one works on the same file at the same time.
-3. Git pull before beginning any new work.
-4. Git push only when you're certain the code runs clean. Valgrind clean.
+1. Ensure no one works on the same file at the same time.
+1. Git pull before beginning any new work.
+1. Git push only when you're certain the code runs clean. Valgrind clean.
+1. DO NOT put senstive keys or information in the source code.
