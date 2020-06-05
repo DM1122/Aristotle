@@ -1,8 +1,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Aristotle
-![Logo](art/png/logo.png)
 A digital Aristotle implementation.
+![Logo](art/png/logo.png | width=100)
 
 ## Pre-Flight Checklist
 * Update [pip](https://pypi.org/project/pip/)
