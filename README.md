@@ -1,52 +1,27 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Aristotle
-<img src="art/png/logo.png" height="32">
 A digital Aristotle implementation.
+<img src="art/png/logo.png" height="32">
+
+# High-Level V1.0 Objectives :book: :galaxy: :brain:
+* Intelligent curation and tagging of YouTube videos for education
+
+:brain:
+:Brain:
+
 
 
 ## Pre-Flight Checklist
-* Update [pip](https://pypi.org/project/pip/)
+* Install [Python](https://www.python.org/) (3.7.6 x64)
+* Install [pip](https://pypi.org/project/pip/)
 * Update [git](https://git-scm.com/)
-* Update [Python](https://www.python.org/) (3.7.6 x64)
+
 * Install [VSCode](https://code.visualstudio.com/)
 * Install [Github Desktop](https://desktop.github.com/)
 * Install [Django](https://www.djangoproject.com/) (3.0.6)
 
 ## Shell Commands Reference
-### Install a package
-```
-pip install [package] 
-```
-
-### List all installed pip packages
-```
-pip list
-```
-
-### Check package version
-```
-pip show [package]
-```
-or
-```
-[package] --version
-```
-
-### Update pip package
-```
-pip install --upgrade [package]
-```
-
-### Uninstall pip package
-```
-pip uninstall [package]
-```
-
-### Uninstall all packages
-```
-pip freeze > requirements.txt && pip uninstall -r requirements.txt -y
-```
 
 ## Using pipenv
 
@@ -102,7 +77,3 @@ More [info](https://www.theserverside.com/video/Follow-these-git-commit-message-
 2. Ensure no one works on the same file at the same time.
 3. Git pull before beginning any new work.
 4. Git push only when you're certain the code runs clean. Valgrind clean.
-
-## Resources
-* Python Package Index: https://pypi.org/
-* Tensorflow Documentation: https://www.tensorflow.org/
