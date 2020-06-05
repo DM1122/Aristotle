@@ -2,7 +2,7 @@
 
 # Aristotle
 A digital Aristotle implementation.
-![Logo](art/png/logo.png =100x100)
+![Logo](art/png/logo.png)
 
 ## Pre-Flight Checklist
 * Update [pip](https://pypi.org/project/pip/)
