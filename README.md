@@ -1,9 +1,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Aristotle Digital
-<img src="art/png/logo.png" height="256" align="center">
 A next-generation online learning tool. Built for students, by students.
-
+<img src="art/png/logo.png" height="256" align="center">
 
 Developed by *Galaxy Heart Studios* :milky_way:
 
