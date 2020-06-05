@@ -3,8 +3,6 @@
 # Aristotle Digital
 <img src="art/png/logo.png" height="256">
 A next-generation online learning tool. Built for students, by students.
-
-
 Developed by *Galaxy Heart Studios* :milky_way:
 
 ## Vision
@@ -13,7 +11,7 @@ In an era of social distancing, effective online learning is of paramount import
 ## High-Level V1.0 Objectives
 * Intelligent video curation for education
 * Intelligent video player
-* Aristotle Digial website
+* Aristotle Digital website
 
 ## Infinity and Beyond
 * Engagement tools for educators with online content
