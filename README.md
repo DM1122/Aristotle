@@ -3,6 +3,7 @@
 # Aristotle Digital
 <img src="art/png/logo.png" height="256">
 A next-generation online learning tool. Built for students, by students.
+
 Developed by *Galaxy Heart Studios* :milky_way:
 
 ## Vision
@@ -35,7 +36,7 @@ pipenv will take care of the rest.
 
 ## Getting Started
 1. Download repo through github desktop
-1. Install all packages specified in Pipfile `pipenv install`
+1. Install all packages specified in Pipfile: `pipenv install`
 1. Profit
 
 ## Committing to Repository
@@ -44,10 +45,10 @@ This repo is configured to use pre-commit hooks. The pre-commit pipeline is conf
 
 A successful commit therefore requires satisfying the syntactic rules put forth by isort, black, and flake8.
 
-isort automatically orders import statements, while black automatically structures code according to PEP8. Flake8 does not provide automatic correction, and must be dealt with manually. It is highly reccomended to install the flake8 linter for the code editor of your choice.
+isort automatically orders import statements, while black automatically formats code according to PEP8. flake8 does not provide automatic correction, and must be dealt with manually. It is highly reccomended to install the flake8 linter for the code editor of your choice.
 
 ## Security
-This repo makes use of `decouple` to manage API keys and other sensitive information.
+This repo makes use of decouple to manage API keys and other sensitive information.
 
 ## Shell Commands Reference
 ### Using pre-commit
@@ -92,4 +93,4 @@ More [info](https://www.theserverside.com/video/Follow-these-git-commit-message-
 1. Ensure no one works on the same file at the same time.
 1. Git pull before beginning any new work.
 1. Git push only when you're certain the code runs clean.
-1. DO NOT put senstive keys or information in the source code.
+1. DO NOT put senstive keys or information in the source code. Use `.env` file along with decouple.
