@@ -1,8 +1,9 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Aristotle Digital
+<p align="center"><img src="art/png/logo.png" height="256"></p>
 A next-generation online learning tool. Built for students, by students.
-<img src="art/png/logo.png" height="256" align="center">
+
 
 Developed by *Galaxy Heart Studios* :milky_way:
 
@@ -41,7 +42,7 @@ pipenv will take care of the rest.
 
 ## Committing to Repository
 This repo is configured to use pre-commit hooks. The pre-commit pipeline is configured as follows:
-<img src="https://miro.medium.com/max/1400/1*zEyQac8rhvayY-2p5DeUHg.png" align="center">
+<p align="center"><img src="https://miro.medium.com/max/1400/1*zEyQac8rhvayY-2p5DeUHg.png"></p>
 
 A successful commit therefore requires satisfying the syntactic rules put forth by isort, black, and flake8.
 
