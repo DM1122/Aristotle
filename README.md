@@ -1,8 +1,9 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Aristotle Digital
+<img src="art/png/logo.png" height="256" align="center">
 A next-generation online learning tool. Built for students, by students.
-<img src="art/png/logo.png" height="32" align="right">
+
 
 Developed by *Galaxy Heart Studios* :milky_way:
 
@@ -78,7 +79,7 @@ pipenv install --ignore-pipfile
 ```
 
 ## The 5 Rules of A Great Git Commit Message
-<img src="https://imgs.xkcd.com/comics/git_commit.png" width="256" align"center">
+<img src="https://imgs.xkcd.com/comics/git_commit.png" width="256" align="center">
 
 1. Write in the imperative
 1. Capitalize first letter in the subject line 
