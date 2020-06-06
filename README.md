@@ -10,8 +10,8 @@ Developed by *Galaxy Heart Studios* :milky_way:
 In an era of social distancing, effective online learning is of paramount importance for the success of the next generation of students, and the continuity of humanity's ventures in every field of study. Aristotle Digital's mission is to provide students and educators alike a set of tools to facilitate and enrich the online learning experience. Join us as we build Humanity's smartest online learning tool. :book: :brain:
 
 ## High-Level V1.0 Objectives
-* Intelligent video curation for education
-* Intelligent video player
+* Intelligent video curation according to user learning style
+* Augmented video player
 * Aristotle Digital website
 
 ## Infinity and Beyond
