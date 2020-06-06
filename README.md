@@ -53,9 +53,11 @@ This repo makes use of decouple to manage API keys and other sensitive informati
 ## Upgrading Project's Python Version
 1. Install new [python](https://www.python.org/) version
 1. Remove virtualenv with `pipenv --rm`
-  1. In case of error, navigate to virtualenv directory and delete manually
+  * In case of error, navigate to virtualenv directory and delete manually
 1. Set new `python_version` in Pipfile
 1. Recreate virtualenv with `pipenv install`
+1. Ensure VSCode python path is set to the virtualenv python install
+1. Uninstall old python version if desired
 
 ## Shell Commands Reference
 ### Using pre-commit
