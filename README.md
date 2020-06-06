@@ -50,6 +50,13 @@ isort automatically orders import statements, while black automatically formats 
 ## Security
 This repo makes use of decouple to manage API keys and other sensitive information.
 
+## Upgrading Project's Python Version
+1. Install new [python](https://www.python.org/) version
+1. Remove virtualenv with `pipenv --rm`
+  1. In case of error, navigate to virtualenv directory and delete manually
+1. Set new `python_version` in Pipfile
+1. Recreate virtualenv with `pipenv install`
+
 ## Shell Commands Reference
 ### Using pre-commit
 Runs on every git commit. Will not push code unless hooks pass.
