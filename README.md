@@ -41,7 +41,7 @@ pipenv will take care of the rest.
 
 ## Getting Started
 1. Download repo through github desktop
-1. Install all packages specified in Pipfile: `pipenv install`
+1. Install all packages specified in Pipfile using `pipenv install`
 1. Profit
 
 ## Committing to Repository
@@ -65,6 +65,15 @@ This repo makes use of decouple to manage API keys and other sensitive informati
 1. Uninstall old python version if desired
 
 ## Shell Commands Reference
+
+### Starting the Development Server
+Open a terminal within the `arsite` folder, and run:
+```
+manage.py runserver
+```
+Click the link to visit the site.
+
+
 ### Using pre-commit
 Runs on every git commit. Will not push code unless hooks pass.
 
