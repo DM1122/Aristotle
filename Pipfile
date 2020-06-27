@@ -27,6 +27,9 @@ flake8-pep3101 = "*"
 pep8-naming = "*"
 isort = "*"
 tensorflow = "*"
+python-decouple = "*"
+opencv-python = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

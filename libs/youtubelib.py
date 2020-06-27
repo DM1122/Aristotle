@@ -116,12 +116,12 @@ def get(idd):
         data["rating"] = -1
 
     try:
-        data["commentCount"] = response["statistics"]["commentCount"]
+        data["comment_count"] = response["statistics"]["commentCount"]
     except KeyError:
         print(
             f'[{script}]: WARNING: "{idd}" does not have comments enabled.'
         ) if verbosity >= 2 else None
-        data["commentCount"] = -1
+        data["comment_count"] = -1
 
     print(f"[{script}]: Got video data.") if verbosity >= 2 else None
     return data
@@ -142,7 +142,7 @@ def download(idd, path):
         return None
 
     data = {
-        "id": idd,
+        "idd": idd,
         "abr": stream.abr,
         "acodec": stream.audio_codec,
         "bitrate": stream.bitrate,
@@ -155,8 +155,9 @@ def download(idd, path):
         "frames": stream.fps * yt.length,
     }
 
+    file_path = path + "/" + data["idd"] + ".mp4"
     print(
-        f'[{script}]: Download successful. Saved to "{path}".'
+        f'[{script}]: Download successful. Saved to "{file_path}".'
     ) if verbosity >= 2 else None
     return data
 

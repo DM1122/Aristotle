@@ -27,14 +27,35 @@ def expedition(queries, search_size=3, search_depth=1):
     print(f"[{script}]: Conducting expedition...")
 
     for query in queries:
-        ids = youtubelib.searchYT(query=query, maxResults=search_size)
+        ids = youtubelib.search(query=query, max_results=search_size)
 
         datas = []
         for idd in ids:
-            data = youtubelib.getYTVideoData(idd=idd)
+            metadata = retrieve(idd=idd)
 
-            datas.append(data)
+            datas.append(metadata)
 
     print(f"[{script}]: Expedition complete.")
 
     return datas
+
+
+def retrieve(idd):
+    """
+    Retrieve metadata for specified video idd.
+    
+    Args:
+        idd (str): video id
+    
+    Returns:
+        metadata (dict): video metadata
+    
+    TODO: rename this from retrieve to something else. Sounds like what the librarian's 'get' function should be called.
+    """
+    print(f"[{script}]: Scouting metadata for {idd}...") if verbosity >= 2 else None
+
+    metadata = youtubelib.get(idd=idd)
+
+    print(f"[{script}]: Got metadata.") if verbosity >= 2 else None
+
+    return metadata

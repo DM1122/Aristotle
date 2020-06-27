@@ -42,3 +42,14 @@ def setup():
     tagger.setup_tags()
 
     print(f"[{script}]: Set up complete.") if verbosity >= 2 else None
+
+
+def inject(idd):
+    """
+    Add a specified video idd of interest into the library.
+    
+    Args:
+        idd (str): YouTube video idd
+    """
+    metadata = scout.retrieve(idd=idd)
+    librarian.store_video_data(data=metadata)

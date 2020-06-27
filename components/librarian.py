@@ -8,6 +8,9 @@ import os
 # django
 import django
 
+# external
+import cv2
+
 # project
 from library.models import Video
 from libs import youtubelib
@@ -81,6 +84,35 @@ def get_video_library():
     Retrieve all video data in library.
     """
     return Video.objects.all()
+
+
+def get_video_file(idd):
+    """
+    Download and return opended video file using youtubelibe and OpenCV. Ensures video exists in database, if not, adds it.
+    
+    Args:
+        idd (str): Video idd in library
+    
+    Returns:
+        video_file (OpenCV Video): Opened video file object
+        file_data (dict): Video file metadata
+    """
+    print(f"[{script}]: Retrieving '{idd}' video file...") if verbosity >= 1 else None
+
+    if idd not in get_stored_video_idds():
+        raise ValueError(
+            f"[{script}]: Did not find '{idd}' in library. Consider scouting metadata first."
+        )
+
+    file_data = youtubelib.download(idd=idd, path="tmp")
+    file_path = "tmp/" + file_data["idd"] + ".mp4"
+
+    video = cv2.VideoCapture(file_path)
+
+    if not video.isOpened:
+        raise Exception(f"[{script}]: Video file '{file_path}' could not be opened.")
+
+    return video, file_data
 
 
 # endregion

@@ -46,7 +46,13 @@ ignore =
     # Import statements are in the wrong order. Lets let isort handle this.
     I100,
     # Additional newline in a group of imports. Let isort handle.
-    I202
+    I202,
+    # Additional line betwen third party imports and stuff.
+    I201,
+    # Use triple quotes
+    D300,
+    # Imported names are in the wrong order. Let isort handle
+    I101
 
 
 

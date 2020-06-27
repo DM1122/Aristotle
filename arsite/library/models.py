@@ -31,6 +31,8 @@ class Video(models.Model):
     comment_count = models.IntegerField(default=0)
     face_score = models.DecimalField(decimal_places=2, max_digits=3, default=0.00)
 
+    parsed_by_visage = models.BooleanField(default=False)
+
     tags = models.ManyToManyField(Tag)
 
     def __str__(self):
